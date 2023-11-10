@@ -933,7 +933,7 @@ int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t
 	if (get_isup_param_msg(msg, param, &pv_idx, &fix, &p, &isup_struct,
 			&isup_part, &param_type) < 0)
 		return -1;
-	LM_WARN("PARAM $isup_param(%.*s)\n",
+	LM_WARN("PARAM $isup_param(%d %s)\n",
 				param->pvv.len,
 				param->pvv.s);
 				
