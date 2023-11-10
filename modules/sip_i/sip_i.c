@@ -918,6 +918,7 @@ int pv_get_isup_param_str(struct sip_msg *msg, pv_param_t *pv_param, pv_value_t 
 
 int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t *val)
 {
+	LM_ERR("location number update !\n");
 	struct isup_parse_fixup *fix = NULL;
 	struct body_part *isup_part;
 	struct isup_parsed_struct *isup_struct;
