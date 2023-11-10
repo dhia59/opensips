@@ -934,8 +934,8 @@ int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t
 			&isup_part, &param_type) < 0)
 		return -1;
 
-	LM_WARN("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d)\n",
-				fix->isup_params_idx,fix->subfield_idx,param->pvn.u.name.s,param->pvi.type,param->pvi.u.ival);
+	LM_WARN("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d)\n",
+				fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival);
 				
 	if (!p) {	/* param not found in parsed struct so it should be a new optional param */
 		opt_p = pkg_malloc(sizeof *opt_p);
