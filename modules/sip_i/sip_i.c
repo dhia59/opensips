@@ -933,15 +933,19 @@ int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t
 	if (get_isup_param_msg(msg, param, &pv_idx, &fix, &p, &isup_struct,
 			&isup_part, &param_type) < 0){
 
-	LM_ERR("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d %d %s %d)\n",
-				fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival,val->ri,val->rs,val->flags);
+		LM_WARN("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d)\n",
+				fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival);
+
+		// LM_ERR("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d %d %s %d)\n",
+		// 		fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival,val->ri,val->rs,val->flags);
+		
 				return -1;
 			}
 		
-	LM_WARN("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d %d %s %d)\n",
-				fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival,val->ri,val->rs,val->flags);
-	
-	
+
+	LM_WARN("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d)\n",
+				fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival);
+				
 	if (!p) {	/* param not found in parsed struct so it should be a new optional param */
 		opt_p = pkg_malloc(sizeof *opt_p);
 		if (!opt_p) {
