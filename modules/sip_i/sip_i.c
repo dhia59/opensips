@@ -918,7 +918,6 @@ int pv_get_isup_param_str(struct sip_msg *msg, pv_param_t *pv_param, pv_value_t 
 
 int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t *val)
 {
-	LM_ERR("location number update !\n");
 	struct isup_parse_fixup *fix = NULL;
 	struct body_part *isup_part;
 	struct isup_parsed_struct *isup_struct;
@@ -930,11 +929,14 @@ int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t
 	int new_len = 0;
 	int i;
 	int new_val;
-
+	
 	if (get_isup_param_msg(msg, param, &pv_idx, &fix, &p, &isup_struct,
 			&isup_part, &param_type) < 0)
 		return -1;
-
+	LM_WARN("PARAM $isup_param(%.*s)\n",
+				*param.pvv.len,
+				*param.pvv.s);
+				
 	if (!p) {	/* param not found in parsed struct so it should be a new optional param */
 		opt_p = pkg_malloc(sizeof *opt_p);
 		if (!opt_p) {
