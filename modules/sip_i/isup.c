@@ -80,6 +80,24 @@ struct isup_message_data isup_messages[NO_ISUP_MESSAGES] = {
 
 #define SUBF_INIT_EMPTY {{0,0}, {0, {{0, 0}}, {0}}}
 
+static struct isup_subfield location_num_subf[] = {
+	{str_init("Odd/even indicator"), {2,
+		{str_init("even"), str_init("odd")}, {0,1}}},
+	{str_init("Nature of address indicator"), {4,
+		{str_init("subscriber"), str_init("unknown"), str_init("national"),
+		 str_init("international")}, {1,2,3,4}}},
+	{str_init("Internal Network Number indicator"), {2,
+		{str_init("allowed"), str_init("not allowed")}, {0,1}}},
+	{str_init("Numbering plan indicator"), {3,
+		{str_init("ISDN"), str_init("Data"), str_init("Telex")}, {1,3,4}}},
+	{str_init("Address presentation restricted indicator"), {4,
+		{str_init("allowed"), str_init("restricted"), str_init("not available"),
+		 str_init("reserved")}, {0,1,2,3}}},
+	{str_init("Screening indicator"), {2,
+		{str_init("user"), str_init("network")}, {1,3}}},
+	{str_init("Address signal"), {0, {{0, 0}}, {0}}},
+	SUBF_INIT_EMPTY};
+
 static struct isup_subfield nature_of_conn_ind_subf[] = {
 	{str_init("Satellite indicator"), {3,
 		{str_init("no satellite"), str_init("one satellite"), str_init("two satellites")}, {0,1,2}}},
@@ -496,6 +514,64 @@ do { \
 } while (0)
 
 /* specific parameter parse/write functions */
+
+void location_num_parsef(int subfield_idx, unsigned char *param_val, int len,
+									int *int_res, str *str_res)
+{
+	int idx[] =   {0,0,1,1,1,1};
+	int shift[] = {7,0,7,4,2,0};
+	int mask[] =  {1,0x7f,1,7,3,3};
+	int oddeven = (param_val[0] >> 7) & 0x1;
+
+	if (subfield_idx < 0 || subfield_idx > 6) {
+		LM_ERR("BUG - bad subfield\n");
+		return;
+	}
+
+	switch (subfield_idx) {
+	case 0:
+		*int_res = oddeven;
+		break;
+	case 6:
+		isup_get_number(str_res, param_val + 2, len - 2, oddeven);
+		break;
+	default:
+		*int_res = (param_val[idx[subfield_idx]] >> shift[subfield_idx]) & mask[subfield_idx];
+	}
+}
+
+int location_num_writef(int param_idx, int subfield_idx, unsigned char *param_val, int *len,
+								pv_value_t *val)
+{
+	int new_val;
+	int num_len, oddeven;
+	str num;
+	int idx[] =   {0,0,1,1,1,1};
+	int mask[] =  {0x80,0x7f,0x80,0x70,0xc,0x3};
+	int shift[] = {7,0,7,4,2,0};
+
+	NUM_PARAM_GET_VAL_PV(6);
+
+	if (subfield_idx < 0 || subfield_idx > 6) {
+		LM_ERR("BUG - bad subfield\n");
+		return -1;
+	}
+
+	if (subfield_idx == 6) {
+		isup_put_number(param_val + 2, num, &num_len, &oddeven);
+		/* also set oddeven, just in case it wasn't already */
+		param_val[0] = SET_BITS(param_val[0], 0x80, 7, oddeven);
+		*len = num_len + 2;
+	} else {
+		param_val[idx[subfield_idx]] = SET_BITS(param_val[idx[subfield_idx]],
+										mask[subfield_idx], shift[subfield_idx], new_val);
+		if (*len == 0)
+			*len = 2;
+	}
+
+	return 0;
+}
+
 
 void nature_of_conn_ind_parsef(int subfield_idx, unsigned char *param_val, int len,
 									int *int_res, str *str_res)
@@ -1209,7 +1285,8 @@ struct isup_param_data isup_params[NO_ISUP_PARAMS] = {
 	{ISUP_PARM_MCID_RESPONSE_IND, str_init("MCID response indicators"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_HOP_COUNTER, str_init("Hop Counter"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_TRANSMISSION_MEDIUM_REQ_PRIME, str_init("Transmission medium requirement prime"), NULL, NULL, NULL, NULL, 0},
-	{ISUP_PARM_LOCATION_NUMBER, str_init("Location Number"), NULL, NULL, NULL, NULL, 0},
+	{ISUP_PARM_LOCATION_NUMBER, str_init("Location Number"), location_num_parsef,location_num_writef, location_num_subf, NULL, 0},
+
 	{ISUP_PARM_REDIRECTION_NUM_RESTRICTION, str_init("Redirection number restriction"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_CALL_TRANSFER_REFERENCE, str_init("Call transfer reference"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_LOOP_PREVENTION_IND, str_init("Loop prevention indicators"), NULL, NULL, NULL, NULL, 0},
