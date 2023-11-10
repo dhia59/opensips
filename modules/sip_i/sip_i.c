@@ -934,8 +934,8 @@ int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t
 			&isup_part, &param_type) < 0)
 		return -1;
 	LM_WARN("PARAM $isup_param(%.*s)\n",
-				*param->pvv.len,
-				*param->pvv.s);
+				param->pvv.len,
+				param->pvv.s);
 				
 	if (!p) {	/* param not found in parsed struct so it should be a new optional param */
 		opt_p = pkg_malloc(sizeof *opt_p);
