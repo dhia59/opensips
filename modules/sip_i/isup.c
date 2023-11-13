@@ -312,7 +312,7 @@ static struct isup_predef_vals transm_med_req_pvals = {
 };
 
 static struct isup_predef_vals hop_counter_req_pvals = {
-	2, {str_init("init"), str_init("reset"), }, {0,73}
+	2, {str_init("init"), str_init("reset"), }, {0x0,0x44}
 };
 
 static inline char digit2char(unsigned char digit)
