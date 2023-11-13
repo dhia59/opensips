@@ -1287,7 +1287,7 @@ struct isup_param_data isup_params[NO_ISUP_PARAMS] = {
 	{ISUP_PARM_MLPP_PRECEDENCE, str_init("MLPP precedence"), NULL,NULL, NULL, NULL, 0},
 	{ISUP_PARM_MCID_REQUEST_IND, str_init("MCID request indicators"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_MCID_RESPONSE_IND, str_init("MCID response indicators"), NULL, NULL, NULL, NULL, 0},
-	{ISUP_PARM_HOP_COUNTER, str_init("Hop Counter"), NULL, NULL, NULL, &hop_counter_req_pvals, 1},
+	{ISUP_PARM_HOP_COUNTER, str_init("Hop Counter"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_TRANSMISSION_MEDIUM_REQ_PRIME, str_init("Transmission medium requirement prime"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_LOCATION_NUMBER, str_init("Location Number"), location_num_parsef,location_num_writef, location_num_subf, NULL, 0},
 
