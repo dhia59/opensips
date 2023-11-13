@@ -943,8 +943,8 @@ int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t
 			}
 		
 
-	// LM_WARN("PARAMS fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %S %d %d)\n",
-	// 			fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival);
+	 LM_WARN("PARAMS pv_idx fix->isup_params_idx fix->subfield_idx param->pvn.u.isname.name.s param->pvi.type param->pvi.u.ival $isup_param(%d %d %d %S %d %d)\n",
+	 			pv_idx,fix->isup_params_idx,fix->subfield_idx,param->pvn.u.isname.name.s,param->pvi.type,param->pvi.u.ival);
 				
 	if (!p) {	/* param not found in parsed struct so it should be a new optional param */
 		opt_p = pkg_malloc(sizeof *opt_p);
@@ -1097,7 +1097,7 @@ int pv_set_isup_param(struct sip_msg* msg, pv_param_t *param, int op, pv_value_t
 					return -1;
 				}
 			} else {
-				LM_WARN("Hex string value required for $isup_param(%.*s)\n",
+				LM_WARN("Hex string value required 2 for $isup_param(%.*s)\n",
 					isup_params[fix->isup_params_idx].name.len,
 					isup_params[fix->isup_params_idx].name.s);
 				return -1;
@@ -1675,7 +1675,7 @@ static int add_isup_part_cmd(struct sip_msg *msg, str *msg_type, str *hdrs)
 					/* 200 OK INVITE -> ANM */
 					isup_msg_idx = get_msg_idx_by_type(ISUP_REL);
 				else if (get_cseq(msg)->method_id == METHOD_BYE)
-					/* 200 OK INVITE -> RLC */
+					/* 200 OK BYE -> RLC */
 					isup_msg_idx = get_msg_idx_by_type(ISUP_RLC);
 				else {
 					LM_WARN("Could not map SIP message to ISUP message type by default\n");
