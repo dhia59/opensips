@@ -48,7 +48,7 @@ static int sam_params[] = {ISUP_PARM_SUBSEQUENT_NUMBER, -1};
 
 static int usr_params[] = {ISUP_PARM_USER_TO_USER_INFO, -1};
 
-static int itx_params[] = {ISUP_PARM_MESSAGE_NUMBER,ISUP_PARM_CHARGE_UNIT_NUMBER -1};
+static int itx_params[] = {ISUP_PARM_MESSAGE_NUMBER,ISUP_PARM_CHARGE_UNIT_NUMBER, -1};
 
 static int isup_empty_params[] = {-1};
 
