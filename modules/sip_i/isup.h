@@ -28,7 +28,7 @@
 
 #include "../../pvar.h"
 
-#define NO_ISUP_MESSAGES 23
+#define NO_ISUP_MESSAGES 25
 
 /* ISUP messages */
 #define ISUP_IAM	0x01	/*!< Initial address */
