@@ -76,8 +76,8 @@ struct isup_message_data isup_messages[NO_ISUP_MESSAGES] = {
 	{str_init("Identification response"), "IRS", ISUP_IRS, 0, 0, isup_empty_params},
 	{str_init("Loop prevention"), "LPR", ISUP_LPR, 0, 0, isup_empty_params},
 	{str_init("Application transport"), "APT", ISUP_APT, 0, 0, isup_empty_params},
-	{str_init("Pre-release information"), "PRI", ISUP_PRI, 0, 0, isup_empty_params}
-	{str_init("Charge unit"), "ITX", ISUP_ITX, 2, 0, itx_params}
+	{str_init("Pre-release information"), "PRI", ISUP_PRI, 0, 0, isup_empty_params},
+	{str_init("Charge unit"), "ITX", ISUP_ITX, 2, 0, itx_params},
 	{str_init("Charging acknowledgement"), "TXA", ISUP_TXA, 0, 0, isup_empty_params}
 };
 
