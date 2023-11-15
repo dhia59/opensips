@@ -1345,8 +1345,8 @@ struct isup_param_data isup_params[NO_ISUP_PARAMS] = {
 	{ISUP_PARM_ORIG_LINE_INFO, str_init("Originating line information"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_CHARGE_NUMBER, str_init("Charge Number"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_SELECTION_INFO, str_init("Selection Information"), NULL, NULL, NULL, NULL, 0},
-	{ISUP_PARM_MESSAGE_NUMBER, str_init("Message Number"), NULL, NULL, NULL, NULL, 0},
-	{ISUP_PARM_CHARGE_UNIT_NUMBER, str_init("Charge Unit Number"), NULL, NULL, NULL, NULL, 0},
+	{ISUP_PARM_MESSAGE_NUMBER, str_init("Message Number"), NULL, NULL, NULL, NULL, 1},
+	{ISUP_PARM_CHARGE_UNIT_NUMBER, str_init("Charge Unit Number"), NULL, NULL, NULL, NULL, 1},
 	{ISUP_PARM_INVAL, {0,0}, NULL, NULL, NULL, NULL, 0}
 };
 
