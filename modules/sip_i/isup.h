@@ -54,6 +54,8 @@
 #define ISUP_LPR	0x40	/*!< Loop prevention */
 #define ISUP_APT	0x41	/*!< Application transport */
 #define ISUP_PRI	0x42	/*!< Pre-release information */
+#define ISUP_ITX	0xe1	/*!< SPIROU ITX */
+#define ISUP_TXA	0xe2	/*!< SPIROU TXA */
 
 
 #define NO_ISUP_PARAMS 109
@@ -173,6 +175,10 @@
 #define ISUP_PARM_ORIG_LINE_INFO				0xea
 #define ISUP_PARM_CHARGE_NUMBER					0xeb
 #define ISUP_PARM_SELECTION_INFO				0xee
+
+#define ISUP_PARM_MESSAGE_NUMBER     			0xc2 
+#define ISUP_PARM_CHARGE_UNIT_NUMBER			0xc3 
+
 
 #define ISUP_PARM_INVAL 0
 

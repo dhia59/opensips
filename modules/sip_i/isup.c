@@ -48,6 +48,8 @@ static int sam_params[] = {ISUP_PARM_SUBSEQUENT_NUMBER, -1};
 
 static int usr_params[] = {ISUP_PARM_USER_TO_USER_INFO, -1};
 
+static int itx_params[] = {ISUP_PARM_MESSAGE_NUMBER,ISUP_PARM_CHARGE_UNIT_NUMBER -1};
+
 static int isup_empty_params[] = {-1};
 
 
@@ -75,6 +77,8 @@ struct isup_message_data isup_messages[NO_ISUP_MESSAGES] = {
 	{str_init("Loop prevention"), "LPR", ISUP_LPR, 0, 0, isup_empty_params},
 	{str_init("Application transport"), "APT", ISUP_APT, 0, 0, isup_empty_params},
 	{str_init("Pre-release information"), "PRI", ISUP_PRI, 0, 0, isup_empty_params}
+	{str_init("Charge unit"), "ITX", ISUP_ITX, 2, 0, itx_params}
+	{str_init("Charging acknowledgement"), "TXA", ISUP_TXA, 0, 0, isup_empty_params}
 };
 
 
@@ -1341,6 +1345,8 @@ struct isup_param_data isup_params[NO_ISUP_PARAMS] = {
 	{ISUP_PARM_ORIG_LINE_INFO, str_init("Originating line information"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_CHARGE_NUMBER, str_init("Charge Number"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_SELECTION_INFO, str_init("Selection Information"), NULL, NULL, NULL, NULL, 0},
+	{ISUP_PARM_MESSAGE_NUMBER, str_init("Message Number"), NULL, NULL, NULL, NULL, 0},
+	{ISUP_PARM_CHARGE_UNIT_NUMBER, str_init("Charge Unit Number"), NULL, NULL, NULL, NULL, 0},
 	{ISUP_PARM_INVAL, {0,0}, NULL, NULL, NULL, NULL, 0}
 };
 
