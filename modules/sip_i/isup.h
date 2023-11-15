@@ -58,7 +58,7 @@
 #define ISUP_TXA	0xe2	/*!< SPIROU TXA */
 
 
-#define NO_ISUP_PARAMS 109
+#define NO_ISUP_PARAMS 111
 
 /* ISUP Parameters ITU-T Q.763 */
 #define ISUP_PARM_CALL_REF						0x01
